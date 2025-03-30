@@ -26,8 +26,16 @@ A real-time chat application with a classic Windows-style interface built using 
 1. **Requirements**:
    ```
    Python 3.7+
-   Flask
-   Flask-SocketIO
+   
+   Root directory requirements:
+   - Flask==3.0.0
+   - Flask-SocketIO==5.3.6
+   - python-socketio==5.11.1
+   - python-engineio==4.8.2
+   - Werkzeug==3.0.1
+   
+   chat_app directory requirements: (additional dependencies)
+   See chat_app/requirements.txt
    ```
 
 2. **Installation**:
@@ -36,11 +44,24 @@ A real-time chat application with a classic Windows-style interface built using 
    git clone https://github.com/yourusername/OpenChat.git
    cd OpenChat
 
-   # Install dependencies
+   # Install dependencies from root requirements.txt
+   pip install -r requirements.txt
+
+   # Change to chat_app directory and install its requirements
+   cd chat_app
    pip install -r requirements.txt
    ```
 
 3. **Running the Application**:
+   
+   Option 1 - Using batch file (Windows):
+   ```bash
+   cd OpenChat-main/chat_app
+   start_chat.bat
+   ```
+   This will automatically install requirements and start the server.
+
+   Option 2 - Manual start:
    ```bash
    cd chat_app
    python app.py
@@ -91,6 +112,23 @@ A real-time chat application with a classic Windows-style interface built using 
 - Firefox
 - Edge
 - Safari
+
+## Troubleshooting
+
+1. **Bad Request Errors (400)**:
+   - Clear your browser cache and refresh the page
+   - Make sure all dependencies are installed with correct versions:
+     ```bash
+     pip list | findstr "Flask Socket engineio Werkzeug"
+     ```
+   - Expected versions:
+     ```
+     Flask==3.0.0
+     Flask-SocketIO==5.3.6
+     python-socketio==5.11.1
+     python-engineio==4.8.2
+     Werkzeug==3.0.1
+     ```
 
 ## License
 
