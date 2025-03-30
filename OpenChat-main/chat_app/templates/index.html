@@ -102,6 +102,7 @@
             color: #FF0000;
             font-size: 12px;
             margin-top: 4px;
+            display: none;
         }
 
         .or-divider {
@@ -120,28 +121,6 @@
             border-top: 1px solid #919B9C;
             margin: 0 8px;
         }
-
-        /* Classic scrollbar style */
-        ::-webkit-scrollbar {
-            width: 16px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #ECE9D8;
-            border: 1px solid #919B9C;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #ECE9D8;
-            border: 1px solid #919B9C;
-            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        ::-webkit-scrollbar-button {
-            background: #ECE9D8;
-            border: 1px solid #919B9C;
-            height: 16px;
-        }
     </style>
 </head>
 <body>
@@ -151,11 +130,11 @@
             Chat Login
         </div>
         <div class="content">
-            <form id="join-form" action="/join_room" method="GET">
+            <form id="joinRoomForm">
                 <div class="form-group">
-                    <label for="room-code">Enter Room Code:</label>
-                    <input type="text" id="room-code" name="code" class="input-field" required>
-                    <div id="join-error" class="error-message"></div>
+                    <label for="roomCode">Enter Room Code:</label>
+                    <input type="text" id="roomCode" class="input-field" maxlength="6" required>
+                    <div id="errorMessage" class="error-message"></div>
                 </div>
                 <div class="button-group">
                     <button type="submit" class="button">Join Room</button>
@@ -164,28 +143,16 @@
 
             <div class="or-divider">OR</div>
 
-            <form id="create-form" action="/create_room" method="POST">
+            <form id="createRoomForm">
                 <div class="button-group">
                     <button type="submit" class="button">Create New Room</button>
                 </div>
-                <div id="create-error" class="error-message"></div>
             </form>
         </div>
     </div>
 
     <script>
-        document.getElementById('join-form').onsubmit = async function(e) {
-            e.preventDefault();
-            const code = document.getElementById('room-code').value.trim().toUpperCase();
-            const response = await fetch(`/join_room/${code}`);
-            if (response.ok) {
-                window.location.href = `/join_room/${code}`;
-            } else {
-                document.getElementById('join-error').textContent = 'Invalid room code';
-            }
-        };
-
-        document.getElementById('create-form').onsubmit = async function(e) {
+        document.getElementById('createRoomForm').onsubmit = async function(e) {
             e.preventDefault();
             try {
                 const response = await fetch('/create_room', { method: 'POST' });
@@ -193,12 +160,26 @@
                     const data = await response.json();
                     window.location.href = `/join_room/${data.room_code}`;
                 } else {
-                    document.getElementById('create-error').textContent = 'Failed to create room';
+                    document.getElementById('errorMessage').textContent = 'Failed to create room';
+                    document.getElementById('errorMessage').style.display = 'block';
                 }
             } catch (error) {
-                document.getElementById('create-error').textContent = 'Failed to create room';
+                document.getElementById('errorMessage').textContent = 'Failed to create room';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        };
+
+        document.getElementById('joinRoomForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const code = document.getElementById('roomCode').value.trim().toUpperCase();
+            const response = await fetch(`/join_room/${code}`);
+            if (response.ok) {
+                window.location.href = `/join_room/${code}`;
+            } else {
+                document.getElementById('errorMessage').textContent = 'Invalid room code';
+                document.getElementById('errorMessage').style.display = 'block';
             }
         };
     </script>
 </body>
-</html> 
+</html>

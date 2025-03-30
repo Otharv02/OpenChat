@@ -19,7 +19,7 @@
             display: flex;
             flex-direction: column;
             padding: 10px;
-            font-size: 16px;
+            font-size: 12px;
         }
 
         .container {
@@ -34,11 +34,11 @@
         .header {
             background: linear-gradient(to right, #0A246A, #A6CAF0);
             color: white;
-            padding: 8px 12px;
+            padding: 4px 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
         }
 
@@ -74,60 +74,61 @@
         .messages {
             flex: 1;
             overflow-y: auto;
-            padding: 16px;
-            font-size: 14px;
-            line-height: 1.5;
+            padding: 8px;
+            font-size: 12px;
+            line-height: 1.4;
             background: #FFFFFF;
         }
 
         .message {
-            margin-bottom: 8px;
-            padding: 8px 12px;
-            border-radius: 4px;
+            margin-bottom: 4px;
+            padding: 4px 8px;
+            border-radius: 2px;
             background: #f5f5f5;
             word-wrap: break-word;
             max-width: 100%;
-        }
-
-        .message .timestamp {
-            color: #666;
-            font-size: 12px;
-            margin-right: 8px;
-        }
-
-        .message .username {
-            color: #0066cc;
-            font-weight: bold;
-            margin-right: 8px;
         }
 
         .message.system {
             color: #666;
             font-style: italic;
             background: #f0f0f0;
-            font-size: 13px;
+            font-size: 11px;
+        }
+
+        .message .timestamp {
+            color: #666;
+            font-size: 11px;
+            margin-right: 4px;
+        }
+
+        .message .username {
+            color: #0A246A;
+            font-weight: bold;
+            margin-right: 4px;
         }
 
         .message .content {
-            display: inline-block;
-            white-space: pre-wrap;
-            margin-top: 4px;
+            display: inline;
         }
 
         .input-area {
-            padding: 10px;
+            padding: 8px;
             background: #ECE9D8;
             border-top: 1px solid #919B9C;
             display: flex;
             gap: 8px;
+            align-items: center;
         }
 
         .message-input {
             flex: 1;
-            padding: 10px;
+            padding: 4px 8px;
             border: 1px solid #919B9C;
-            font-size: 16px;
-            height: 45px;
+            font-size: 12px;
+            font-family: Tahoma, Arial, sans-serif;
+            resize: none;
+            height: 24px;
             background: #FFFFFF;
         }
 
@@ -136,13 +137,84 @@
             border-color: #0A246A;
         }
 
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-upload input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .file-button {
+            background: #ECE9D8;
+            border: 2px solid #919B9C;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: Tahoma, Arial, sans-serif;
+            border-radius: 3px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .file-button:active {
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .file-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .message.file {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: #ECE9D8;
+            border: 1px solid #919B9C;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #000000;
+            font-size: 11px;
+        }
+
+        .file-download:hover {
+            background: #FFFFFF;
+        }
+
+        .file-download:active {
+            background: #D4D0C8;
+        }
+
         .send-button {
             background: #ECE9D8;
             border: 2px solid #919B9C;
-            padding: 8px 16px;
+            padding: 2px 12px;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
+            font-size: 12px;
+            font-family: Tahoma, Arial, sans-serif;
+            border-radius: 3px;
             box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
@@ -151,9 +223,9 @@
         }
 
         .users-panel {
-            width: 200px;
+            width: 150px;
             background: #ECE9D8;
-            padding: 10px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
         }
@@ -169,16 +241,17 @@
 
         .users-list {
             list-style: none;
-            font-size: 16px;
+            font-size: 12px;
             color: #000000;
             background: #FFFFFF;
             border: 1px solid #919B9C;
             padding: 4px;
             flex: 1;
+            overflow-y: auto;
         }
 
         .users-list li {
-            padding: 6px;
+            padding: 2px 4px;
             cursor: default;
         }
 
@@ -194,6 +267,7 @@
             cursor: pointer;
             font-size: 12px;
             font-family: Tahoma, Arial, sans-serif;
+            padding: 0 4px;
         }
 
         .leave-button:hover {
@@ -234,27 +308,32 @@
         <div class="header">
             <div class="room-info">
                 <div class="room-code">Room: {{ room_code }}</div>
-                <div class="user-name" id="user-name"></div>
+                <div class="user-name" id="userName"></div>
             </div>
             <button class="leave-button" onclick="leaveRoom()">✕</button>
         </div>
-        
         <div class="main-content">
             <div class="chat-container">
                 <div class="messages" id="messages"></div>
                 <div class="input-area">
-                    <textarea 
+                    <input type="text" 
                         class="message-input" 
-                        id="message-input" 
+                        id="messageInput" 
                         placeholder="Type a message..."
                         onkeydown="if(event.keyCode === 13 && !event.shiftKey) { event.preventDefault(); sendMessage(); }">
-                    </textarea>
+                    <div class="file-upload">
+                        <input type="file" id="fileInput" onchange="uploadFile(this.files[0])">
+                        <button class="file-button">
+                            <span class="file-icon">📎</span>
+                            Attach
+                        </button>
+                    </div>
                     <button class="send-button" onclick="sendMessage()">Send</button>
                 </div>
             </div>
             <div class="users-panel">
                 <h3>Online Users</h3>
-                <ul class="users-list" id="users-list"></ul>
+                <ul class="users-list" id="usersList"></ul>
             </div>
         </div>
     </div>
@@ -269,7 +348,7 @@
         socket.on('status', function(data) {
             if (data.user_name) {
                 userName = data.user_name;
-                document.getElementById('user-name').textContent = userName;
+                document.getElementById('userName').textContent = userName;
             }
         });
         
@@ -291,9 +370,9 @@
             addMessage(message);
             scrollToBottom();
         });
-        
+
         function sendMessage() {
-            const input = document.getElementById('message-input');
+            const input = document.getElementById('messageInput');
             const content = input.value.trim();
             if (content) {
                 socket.emit('send_message', {
@@ -304,33 +383,76 @@
             }
         }
 
+        function uploadFile(file) {
+            if (!file) return;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('room_code', roomCode);
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                }
+                // Clear the file input
+                document.getElementById('fileInput').value = '';
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                alert('Error uploading file: ' + error);
+                document.getElementById('fileInput').value = '';
+            });
+        }
+
         function addMessage(message) {
-            const messagesDiv = document.getElementById('messages');
             const messageDiv = document.createElement('div');
             
             if (message.type === 'system') {
                 messageDiv.className = 'message system';
                 messageDiv.textContent = `[${message.timestamp}] ${message.content}`;
-            } else {
-                messageDiv.className = 'message user';
+            } else if (message.type === 'file') {
+                messageDiv.className = 'message file';
                 messageDiv.innerHTML = `
                     <span class="timestamp">[${message.timestamp}]</span>
                     <span class="username">${message.user}:</span>
-                    <span class="content">${message.content}</span>
-                `;
+                    <a href="/download/${message.content}" class="file-download" target="_blank">
+                        <span class="file-icon">📄</span>
+                        ${message.original_name}
+                    </a>`;
+            } else {
+                messageDiv.className = 'message';
+                messageDiv.innerHTML = `
+                    <span class="timestamp">[${message.timestamp}]</span>
+                    <span class="username">${message.user}:</span>
+                    <span class="content">${message.content}</span>`;
             }
             
-            messagesDiv.appendChild(messageDiv);
+            document.getElementById('messages').appendChild(messageDiv);
+            scrollToBottom();
         }
-        
+
         function updateUsersList(users) {
-            const usersList = document.getElementById('users-list');
-            usersList.innerHTML = users.map(user => `<li>${user}</li>`).join('');
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = '';
+            users.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'user';
+                userElement.textContent = user;
+                if (user === userName) {
+                    userElement.classList.add('current-user');
+                }
+                usersList.appendChild(userElement);
+            });
         }
         
         function scrollToBottom() {
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            const messages = document.getElementById('messages');
+            messages.scrollTop = messages.scrollHeight;
         }
         
         function leaveRoom() {
@@ -341,14 +463,14 @@
         }
         
         // Handle page unload
-        window.onbeforeunload = function() {
+        window.addEventListener('beforeunload', function() {
             socket.emit('leave', { room_code: roomCode });
-        };
+        });
 
         // Focus input when page loads
         window.onload = function() {
-            document.getElementById('message-input').focus();
+            document.getElementById('messageInput').focus();
         };
     </script>
 </body>
-</html> 
+</html>
