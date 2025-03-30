@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #ECE9D8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #ECE9D8;
+            border: 2px solid #919B9C;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            background: linear-gradient(to right, #0A246A, #A6CAF0);
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .content {
+            padding: 16px;
+            background: #ECE9D8;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 4px;
+            color: #000000;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 4px;
+            font-size: 12px;
+            border: 1px solid #919B9C;
+            background: #FFFFFF;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #0A246A;
+        }
+
+        .button {
+            background: #ECE9D8;
+            border: 2px solid #919B9C;
+            padding: 4px 12px;
+            cursor: pointer;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 12px;
+            border-radius: 3px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            min-width: 80px;
+        }
+
+        .button:active {
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .error-message {
+            color: #FF0000;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .or-divider {
+            text-align: center;
+            margin: 12px 0;
+            font-size: 12px;
+            color: #666666;
+            display: flex;
+            align-items: center;
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid #919B9C;
+            margin: 0 8px;
+        }
+
+        /* Classic scrollbar style */
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #ECE9D8;
+            border: 1px solid #919B9C;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ECE9D8;
+            border: 1px solid #919B9C;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        ::-webkit-scrollbar-button {
+            background: #ECE9D8;
+            border: 1px solid #919B9C;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAbwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGESURBVDiNlZK9SgNBFIXPndnZ7I9IhEQRtBKxEGwEQYKVYGFhYSE+gYW1jyBYiYWFD2AjCFaCYKGFhYVgIYqCQbQxMZvd7M7MtVhXs0QxeqqBw/nuPZy7hHOOVSCvIgL/AXDOIQgCAMAwDFiWBUmSwDkHYwyccxBCwDmHpmkghIBSCkIIGGOQZRmyLEPTNAiCAFEUgTEGznkopcuHKIrQ7/dRKpXQbDZRrVYxGo0wnU4xHo/R6/UwHA4xmUzAGIOu6zAMA6qqQhRFKIoCQggopaBBEKDT6aBer6PdbmM+n8OyLOi6DlmWUalUUKvVUC6XEYYhXNeFbduYzWbwfR+u68L3fXDOQQkhYIxBkiSk0+lCURRQSqGqKkqlEnRdh2EY0DQNkiQtE4qiCFmWIQxDxHGMJElA0zSF53kolUoQBAGe58F1Xdi2Dd/3EQQBPp6fsXl0iKvbO7x5HhzHwWKxgOM4cF0XnudhsVj8XuPvkGUZqqrCNE0UCoVVEPwEfAK6c8gT1oWSSgAAAABJRU5ErkJggg==" alt="Chat Icon">
+            Chat Login
+        </div>
+        <div class="content">
+            <form id="join-form" action="/join_room" method="GET">
+                <div class="form-group">
+                    <label for="room-code">Enter Room Code:</label>
+                    <input type="text" id="room-code" name="code" class="input-field" required>
+                    <div id="join-error" class="error-message"></div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="button">Join Room</button>
+                </div>
+            </form>
+
+            <div class="or-divider">OR</div>
+
+            <form id="create-form" action="/create_room" method="POST">
+                <div class="button-group">
+                    <button type="submit" class="button">Create New Room</button>
+                </div>
+                <div id="create-error" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('join-form').onsubmit = async function(e) {
+            e.preventDefault();
+            const code = document.getElementById('room-code').value.trim().toUpperCase();
+            const response = await fetch(`/join_room/${code}`);
+            if (response.ok) {
+                window.location.href = `/join_room/${code}`;
+            } else {
+                document.getElementById('join-error').textContent = 'Invalid room code';
+            }
+        };
+
+        document.getElementById('create-form').onsubmit = async function(e) {
+            e.preventDefault();
+            try {
+                const response = await fetch('/create_room', { method: 'POST' });
+                if (response.ok) {
+                    const data = await response.json();
+                    window.location.href = `/join_room/${data.room_code}`;
+                } else {
+                    document.getElementById('create-error').textContent = 'Failed to create room';
+                }
+            } catch (error) {
+                document.getElementById('create-error').textContent = 'Failed to create room';
+            }
+        };
+    </script>
+</body>
+</html> 
