@@ -212,23 +212,26 @@ def on_leave(data):
     except Exception as e:
         emit('status', {'msg': f'Error leaving room: {str(e)}'})
 
-@socketio.on('send_message')
+@socketio.on('message')
 def on_message(data):
     try:
-        room_code = data['room_code']
-        content = data['content']
-        if room_code in rooms and request.sid in rooms[room_code]['users']:
-            user_name = rooms[room_code]['users'][request.sid]
-            message = {
-                'type': 'user',
-                'user': user_name,
-                'content': content,
-                'timestamp': datetime.now().strftime('%H:%M:%S')
+        print(f"Received message from {data['username']} in room {data['room']}: {data['message']}")  # Debug print
+        room = data['room']
+        if room in rooms:
+            # Store the message
+            message_data = {
+                'username': data['username'],
+                'message': data['message'],
+                'timestamp': datetime.now().isoformat(),
+                'type': 'message'
             }
-            rooms[room_code]['messages'].append(message)
-            emit('new_message', message, room=room_code)
+            rooms[room]['messages'].append(message_data)
+            
+            # Broadcast to all users in the room except sender
+            emit('message', message_data, room=room, include_self=False)
+            print(f"Message broadcasted to room {room}")  # Debug print
     except Exception as e:
-        emit('status', {'msg': f'Error sending message: {str(e)}'})
+        print(f"Error handling message: {str(e)}")  # Debug print
 
 def get_local_ip():
     try:
